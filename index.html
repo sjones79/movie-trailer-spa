@@ -2,12 +2,81 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <title>Movie Trailers</title>
         <meta name="description" content="Single page application to display movie trailers from youtube">
         <meta name="author" content="Schelsea Jones">
-        <meta name="keywords" content="youtube, spa, single, page, application, fluid, responsive, video, html5, bootstrap,css, javascript">
-        <link href="css/bootstrap.min.css" rel="stylesheet"> 
+        <meta name="keywords" content="youtube, spa, single, page, application, fluid, responsive, video, html5, bootstrap, css, javascript">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
+        <!-- Movie Category Top Nav -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <section class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#movie-categories">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Movie Trailers</a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="movie-categories">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="#">Comic Books</a>
+                        </li>
+                        <li>
+                            <a href="#">Martial Arts</a>
+                        </li>
+                        <li>
+                            <a href="#">Anime</a>
+                        </li>
+                    </ul>
+                </div>
+            <!-- /.navbar-collapse -->
+        </section>
+        <!-- /.container-fluid -->
+    </nav>
+        
+        <section class="container-fluid">
+            
+            <header class="jumbotron">
+                <h1> Messing Around</h1>
+                <p> Testing responsive bootstrap without an existing template</p>
+            </header>
+            
+            <div class="row">
+                <div class="col-sm-4">
+                    <h3>Column 1</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+                </div>
+                <div class="col-sm-4">
+                    <h3>Column 2</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+                </div>
+                <div class="col-sm-4">
+                    <h3>Column 3</h3>        
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+                </div>
+            </div>
+        </section>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
     </body>
 </html>
