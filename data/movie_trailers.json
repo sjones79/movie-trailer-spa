@@ -1,0 +1,31 @@
+{
+	"movie_trailers":
+		{
+            "category" : "Comic Book",
+			"movies":
+				[
+					{ "title": "Deadpool"},
+					{ "title": "Batman vs Superman Dawn of Justice"},
+					{ "title": "Guardians of the Galaxy"},
+					{ "title": "Kingsman: The Secret Service"},
+                    {" title": "Spawn"}
+				],
+	        "category" : "Martial Arts",
+			"movies":
+				[
+					{ "title": "The Big Boss"},
+					{ "title": "One-Armed Swordsman"},
+					{ "title": "Only The Strong"},
+					{ "title": "Five Deadly Venoms"},
+                    {" title": "Knockabout"}
+				],
+            "category" : "Anime",
+			"movies":
+				[
+					{ "title": "Ninja Scroll"},
+					{ "title": "Fist of the North Star"},
+					{ "title": "Spirited Away"},
+					{ "title": "Akira"},
+                    {" title": "Toyko Godfathers"}
+				]
+}
