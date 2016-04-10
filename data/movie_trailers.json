@@ -1,5 +1,5 @@
-{
-	"movie_trailers": {
+[
+    {
 		"category": "Comic Book",
 		"movies": [{
 			"title": "Deadpool"
@@ -10,8 +10,9 @@
 		}, {
 			"title": "Kingsman: The Secret Service"
 		}, {
-			" title": "Spawn"
-		}],
+			"title": "Spawn"
+		}]
+    }, {
 		"category": "Martial Arts",
 		"movies": [{
 			"title": "The Big Boss"
@@ -22,8 +23,9 @@
 		}, {
 			"title": "Five Deadly Venoms"
 		}, {
-			" title": "Knockabout"
-		}],
+			"title": "Knockabout"
+		}]
+    },{
 		"category": "Anime",
 		"movies": [{
 			"title": "Ninja Scroll"
@@ -34,7 +36,7 @@
 		}, {
 			"title": "Akira"
 		}, {
-			" title": "Toyko Godfathers"
+			"title": "Toyko Godfathers"
 		}]
-	}
-}
+    }
+]
