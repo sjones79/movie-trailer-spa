@@ -7,7 +7,7 @@ function onYouTubeIframeAPIReady() {
             videoId: 'gtTfd6tISfw',
             playerVars: {
                 html5: 1,
-                controls: 0,
+                controls: 1,
                 modestbranding: 0,
                 showinfo: 0,
                 rel: 0
