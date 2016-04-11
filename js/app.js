@@ -25,19 +25,26 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('movie-category').innerHTML = "Comic Book Movies";
         loadMovieTrailersFromFile("Comic Books");
     
+        var defaultYtId;
         //load movies based on category menu
-        comicBookMenu.addEventListener('click', function(e){
+        comicBookMenu.addEventListener('click', function(){
+            defaultYtId = 'gtTfd6tISfw';
             document.getElementById('movie-category').innerHTML = "Comic Book API Service Call";
+            ytPlayer.cueVideoById(defaultYtId);
             loadMovieTrailersFromFile("Comic Books");
         }, false);
         
-        martialArtMenu.addEventListener('click', function(e){
+        martialArtMenu.addEventListener('click', function(){
+            defaultYtId = 'EzixcX_FonU';
             document.getElementById('movie-category').innerHTML = "Martial Arts API Service Call";
+            ytPlayer.cueVideoById(defaultYtId);
             loadMovieTrailersFromFile("Martial Arts");
         }, false);
         
-        animeMenu.addEventListener('click', function(e){
+        animeMenu.addEventListener('click', function(){
+            defaultYtId = 'kqh0CZ8w4Yc';
             document.getElementById('movie-category').innerHTML = "Anime API Service Call";
+            ytPlayer.cueVideoById(defaultYtId);
             loadMovieTrailersFromFile("Anime");
         }, false);
     
@@ -72,7 +79,6 @@ var changeMovie = function() {
     var ytId = this.getAttribute("data-yt-id");
     
     if(imdbId != null && ytId != null) {
-        console.log("imdbId " + imdbId + " youtube id " + ytId);
         ytPlayer.cueVideoById(ytId);
         getSelectedMovieByImdbId(imdbId, ytId);
     }   
