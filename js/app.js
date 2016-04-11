@@ -54,6 +54,11 @@ var displayData = function (movieResponse) {
     
 }
 
+var getImdbIdFromTrailerPreview = function(trailerPreview) {
+    var imdbId = this.getAttribute("data-imdb-id");
+    console.log("imdbId from " +this.getAttribute("id") +" "+ imdbId);    
+}
+
 var updatePreviewList = function(movieObj, selectedMovieId) {
     var movieList = movieObj["movies"];
     var ctr;
@@ -68,18 +73,14 @@ var updatePreviewList = function(movieObj, selectedMovieId) {
         if(movieIdArr.indexOf(movieList[ctr].imdb_id) === -1) {
             trailerSelectorArr[idPtr].setAttribute("data-imdb-id", movieList[ctr].imdb_id);
             
-            trailerSelectorArr[idPtr].addEventListener('click', function (e){
-                console.log("data attribute",trailerSelectorArr[idPtr].getAttribute("data-imdb-id"));
-                console.log(e);
-            });
-            console.log(trailerSelectorArr[idPtr]);
+            trailerSelectorArr[idPtr].addEventListener('click', getImdbIdFromTrailerPreview, false);
+            console.log("trailer element",trailerSelectorArr[idPtr]);
             
             movieIdArr.push(movieList[ctr].imdb_id);
             idPtr++;
         }
     }
     
-    console.log("movieIdArr",movieIdArr);
     console.log("trailerSelectorArr",trailerSelectorArr);
 
     
@@ -90,6 +91,8 @@ var updatePreviewList = function(movieObj, selectedMovieId) {
     var show = msglist.getAttribute("data-list-size");
      msglist.setAttribute("data-list-size", +show+3); */
 }
+
+
 
 
 
