@@ -12,6 +12,7 @@
 //TODO 
 // Add decent commenting
 
+var currentMovieObj = {};
 
 var getComicBookMovies = function (data) {
     
@@ -22,6 +23,7 @@ var getComicBookMovies = function (data) {
         }
     });
     console.log(comicBookMovies);
+    currentMovieObj = comicBookMovies;
     getMovieDataFromOmdb(comicBookMovies);    
 }
 
@@ -33,6 +35,7 @@ var getMartialArtsMovies = function (data) {
         }
     });
     console.log(martialArtsMovies);
+    currentMovieObj = martialArtsMovies;
     getMovieDataFromOmdb(martialArtsMovies);    
 
 }
@@ -45,6 +48,7 @@ var getAnimeMovies = function (data) {
         }
     });
     console.log(animeMovies); 
+    currentMovieObj = animeMovies;
     getMovieDataFromOmdb(animeMovies);    
 
 }
@@ -65,7 +69,7 @@ var makeOMDBRequest = function (movieTitle, movieId, callback) {
             url = "http://www.omdbapi.com/?i="+movieId+"&plot=short&r=json";
         }
     }
-    
+    console.log("currentMovieObj",currentMovieObj);
     if(url != undefined && callback != undefined) {
         omdbRequest.onreadystatechange = function() {
             if (omdbRequest.readyState == 4 && omdbRequest.status == 200) {
