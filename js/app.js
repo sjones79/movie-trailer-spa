@@ -53,9 +53,17 @@ document.addEventListener('DOMContentLoaded', function () {
 var displayData = function (movieResponse) {
     document.getElementById('movie-title').innerHTML = movieResponse.Title;
     document.getElementById('movie-description').innerHTML = '<p>' + movieResponse.Plot +'</p>';
-    //TODO add movie metadata
-
     
+    var movieMetaDataHTML = '<ul>';
+    movieMetaDataHTML += '<li>Year: ' + movieResponse.Year + '</li>';
+    movieMetaDataHTML += '<li>Director: ' + movieResponse.Director + '</li>';
+    movieMetaDataHTML += '<li>Stars: ' + movieResponse.Actors + '</li>';
+    
+    //close the list
+    movieMetaDataHTML += '</ul>';
+    
+    document.getElementById('movie-metadata').innerHTML = movieMetaDataHTML;
+
 }
 
 var changeMovie = function() {
