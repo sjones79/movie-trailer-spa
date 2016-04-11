@@ -54,9 +54,9 @@ var displayData = function (movieResponse) {
     
 }
 
-var getImdbIdFromTrailerPreview = function(trailerPreview) {
+var changeMovie = function() {
     var imdbId = this.getAttribute("data-imdb-id");
-    console.log("imdbId from " +this.getAttribute("id") +" "+ imdbId);    
+    getSelectedMovieByImdbId(imdbId, displayData);      
 }
 
 var updatePreviewList = function(movieObj, selectedMovieId) {
@@ -73,8 +73,7 @@ var updatePreviewList = function(movieObj, selectedMovieId) {
         if(movieIdArr.indexOf(movieList[ctr].imdb_id) === -1) {
             trailerSelectorArr[idPtr].setAttribute("data-imdb-id", movieList[ctr].imdb_id);
             
-            trailerSelectorArr[idPtr].addEventListener('click', getImdbIdFromTrailerPreview, false);
-            console.log("trailer element",trailerSelectorArr[idPtr]);
+            trailerSelectorArr[idPtr].addEventListener('click', changeMovie, false);
             
             movieIdArr.push(movieList[ctr].imdb_id);
             idPtr++;
