@@ -12,7 +12,7 @@
 //TODO 
 // Add decent commenting
 
-
+var currentMovieObj = {};
 var loadMovieTrailersFromFile = function(callback, category) { 
     
     //TODO check if callback is not null and is a function before proceeding
@@ -31,22 +31,25 @@ var loadMovieTrailersFromFile = function(callback, category) {
 
 var getMovieDataByCategory = function (data, category) {
     var movieData = {};
+    var selectedImdbId;
     JSON.parse(data).forEach(function(movieObj){
         if( movieObj.category.toLowerCase() === category.toLowerCase()){
             movieData = movieObj;
         }
     });
-
-    getMovieDataFromOmdb(movieData);
+    
+    selectedImdbId = movieData["movies"][0].imdb_id;
+    currentMovieObj = movieData;
+    getMovieDataFromOmdb(movieData,selectedImdbId);
     
 }
 
 
 //takes one movie object from a given category to fetch data from
-var getMovieDataFromOmdb = function (movieObj) {
+var getMovieDataFromOmdb = function (movieObj, selectedImdbId) {
     //pass the current movie object and the already selected movie id
-    updatePreviewList(movieObj, movieObj["movies"][0].imdb_id);
-    makeOMDBRequest(movieObj["movies"][0].title, null, displayData);
+    updatePreviewList(movieObj, selectedImdbId);
+    makeOMDBRequest(null, selectedImdbId, displayData);
 }
 
 var makeOMDBRequest = function (movieTitle, imdbId, callback) {
@@ -54,6 +57,7 @@ var makeOMDBRequest = function (movieTitle, imdbId, callback) {
     //TODO when a a movie is not found, the response object has the following properties
     //{Response: "False", Error: "Movie not found!"}
     //Error checking should check for a property called 'Response' and handle if the value is 'False'
+     //TODO check if callback is not null and is a function before proceeding
     var omdbRequest = new XMLHttpRequest();
     var url;
     
@@ -79,8 +83,8 @@ var makeOMDBRequest = function (movieTitle, imdbId, callback) {
     } 
 }
 
-var getSelectedMovieByImdbId = function (imdbId, callback) {
-    makeOMDBRequest(null, imdbId, callback);
+var getSelectedMovieByImdbId = function (imdbId) {
+   getMovieDataFromOmdb(currentMovieObj, imdbId)
 }
 
 
