@@ -1,16 +1,13 @@
 'use strict';
 
-//TODO to request an individual movie, you'll have to 
-// go through the path of getting all the movies, but have a flag set
-// to determine whether or not to get all the movies from a category
-// or just one
-// This should help with clicking on the other trailers and playing them for a given movie
 
 //TODO
 //ADD ERROR HANDLING LIKE CRAZY
 
 //TODO 
 // Add decent commenting
+
+//TODO make it clear what the callbacks are
 
 var currentMovieObj = {};
 var loadMovieTrailersFromFile = function(callback, category) { 
@@ -32,6 +29,7 @@ var loadMovieTrailersFromFile = function(callback, category) {
 var getMovieDataByCategory = function (data, category) {
     var movieData = {};
     var selectedImdbId;
+    var youtubeId;
     JSON.parse(data).forEach(function(movieObj){
         if( movieObj.category.toLowerCase() === category.toLowerCase()){
             movieData = movieObj;
@@ -39,17 +37,19 @@ var getMovieDataByCategory = function (data, category) {
     });
     
     selectedImdbId = movieData["movies"][0].imdb_id;
+    youtubeId = movieData["movies"][0].yt_id;
     currentMovieObj = movieData;
-    getMovieDataFromOmdb(movieData,selectedImdbId);
+    getMovieDataFromOmdb(movieData,selectedImdbId, youtubeId);
     
 }
 
 
 //takes one movie object from a given category to fetch data from
-var getMovieDataFromOmdb = function (movieObj, selectedImdbId) {
+var getMovieDataFromOmdb = function (movieObj, imdbId, ytId) {
     //pass the current movie object and the already selected movie id
-    updatePreviewList(movieObj, selectedImdbId);
-    makeOMDBRequest(null, selectedImdbId, displayData);
+    updatePreviewList(movieObj, imdbId);
+    setYTPlayer(ytId);
+    makeOMDBRequest(null, imdbId, displayData);
 }
 
 var makeOMDBRequest = function (movieTitle, imdbId, callback) {
@@ -83,16 +83,56 @@ var makeOMDBRequest = function (movieTitle, imdbId, callback) {
     } 
 }
 
-var getSelectedMovieByImdbId = function (imdbId) {
-   getMovieDataFromOmdb(currentMovieObj, imdbId)
+var getSelectedMovieByImdbId = function (imdbId, ytId) {
+   getMovieDataFromOmdb(currentMovieObj, imdbId, ytId)
 }
 
 
+var setYTPlayer = function (videoId) {
+    var tag = document.createElement('script');
 
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-
-
-
-var YTApiCall = function () {
+            
+    var player;
     
+    window.onYouTubeIframeAPIReady = function() {
+        player = new YT.Player('player', {
+            height: '500',
+            width: '750',
+            videoId: videoId,
+            playerVars: {
+                html5: 1,
+                controls: 0,
+                modestbranding: 0,
+                showinfo: 0,
+                rel: 0
+            },
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+          });
+     }
+
+    // 4. The API will call this function when the video player is ready.
+    function onPlayerReady(event) {
+        event.target.playVideo();
+    }
+
+      // 5. The API calls this function when the player's state changes.
+      //    The function indicates that when playing a video (state=1),
+      //    the player should play for six seconds and then stop.
+    var done = false;
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+            stopVideo();
+            done = true;
+        }
+    }
+    function stopVideo() {
+        player.stopVideo();
+    }
 }
