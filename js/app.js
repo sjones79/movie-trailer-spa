@@ -19,27 +19,33 @@ document.addEventListener('DOMContentLoaded', function () {
         var trailer1 = document.querySelector('#trailer1');
         var trailer2 = document.querySelector('#trailer2');
         var trailer3 = document.querySelector('#trailer3');
-        var trailer4 = document.querySelector('#trailer4');
-    
+        var trailer4 = document.querySelector('#trailer4');    
         
         //by default load the comic book movies
         document.getElementById('movie-category').innerHTML = "Comic Book Movies";
-        loadMovieTrailersFromFile(getMovieDataByCategory, "Comic Books");
+        loadMovieTrailersFromFile("Comic Books");
     
+        var defaultYtId;
         //load movies based on category menu
-        comicBookMenu.addEventListener('click', function(e){
-            document.getElementById('movie-category').innerHTML = "Comic Book API Service Call";
-            loadMovieTrailersFromFile(getMovieDataByCategory, "Comic Books");
+        comicBookMenu.addEventListener('click', function(){
+            defaultYtId = 'gtTfd6tISfw';
+            document.getElementById('movie-category').innerHTML = "Comic Book Movies";
+            ytPlayer.cueVideoById(defaultYtId);
+            loadMovieTrailersFromFile("Comic Books");
         }, false);
         
-        martialArtMenu.addEventListener('click', function(e){
-            document.getElementById('movie-category').innerHTML = "Martial Arts API Service Call";
-            loadMovieTrailersFromFile(getMovieDataByCategory, "Martial Arts");
+        martialArtMenu.addEventListener('click', function(){
+            defaultYtId = 'EzixcX_FonU';
+            document.getElementById('movie-category').innerHTML = "Martial Arts Movies";
+            ytPlayer.cueVideoById(defaultYtId);
+            loadMovieTrailersFromFile("Martial Arts");
         }, false);
         
-        animeMenu.addEventListener('click', function(e){
-            document.getElementById('movie-category').innerHTML = "Anime API Service Call";
-            loadMovieTrailersFromFile(getMovieDataByCategory, "Anime");
+        animeMenu.addEventListener('click', function(){
+            defaultYtId = 'kqh0CZ8w4Yc';
+            document.getElementById('movie-category').innerHTML = "Anime Movies";
+            ytPlayer.cueVideoById(defaultYtId);
+            loadMovieTrailersFromFile("Anime");
         }, false);
     
     
@@ -47,6 +53,8 @@ document.addEventListener('DOMContentLoaded', function () {
         trailerSelectorArr.push(trailer2);
         trailerSelectorArr.push(trailer3);
         trailerSelectorArr.push(trailer4);
+    
+       
         
 });
 
@@ -68,13 +76,16 @@ var displayData = function (movieResponse) {
 
 var changeMovie = function() {
     var imdbId = this.getAttribute("data-imdb-id");
-    getSelectedMovieByImdbId(imdbId);      
+    var ytId = this.getAttribute("data-yt-id");
+    
+    if(imdbId != null && ytId != null) {
+        ytPlayer.cueVideoById(ytId);
+        getSelectedMovieByImdbId(imdbId, ytId);
+    }   
 }
 
 var updatePreviewList = function(movieObj, selectedMovieId) {
-    //TODO when updating the preview list, we are not adding the original movie back to the options to be selected below
-    //as we change movies, the first movie should be available
-    //there should always be one active movie and four staged ones
+    //TODO error check the emptiness of the parameters before using them
     var movieList = movieObj["movies"];
     var ctr;
     var idPtr = 0;
@@ -87,8 +98,10 @@ var updatePreviewList = function(movieObj, selectedMovieId) {
         
         if(movieIdArr.indexOf(movieList[ctr].imdb_id) === -1) {
             trailerSelectorArr[idPtr].setAttribute("data-imdb-id", movieList[ctr].imdb_id);
+            trailerSelectorArr[idPtr].setAttribute('data-yt-id', movieList[ctr].yt_id);
             
             trailerSelectorArr[idPtr].addEventListener('click', changeMovie, false);
+            
             
             movieIdArr.push(movieList[ctr].imdb_id);
             idPtr++;

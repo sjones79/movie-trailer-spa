@@ -1,10 +1,5 @@
 'use strict';
 
-//TODO to request an individual movie, you'll have to 
-// go through the path of getting all the movies, but have a flag set
-// to determine whether or not to get all the movies from a category
-// or just one
-// This should help with clicking on the other trailers and playing them for a given movie
 
 //TODO
 //ADD ERROR HANDLING LIKE CRAZY
@@ -12,44 +7,57 @@
 //TODO 
 // Add decent commenting
 
-var currentMovieObj = {};
-var loadMovieTrailersFromFile = function(callback, category) { 
-    
-    //TODO check if callback is not null and is a function before proceeding
-    var jsonFile = "data/movie_trailers.json";
-    var xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
-    xobj.open('GET', jsonFile, true); 
-    xobj.onreadystatechange = function () {
+//TODO make it clear what the callbacks are
 
-        if (xobj.readyState == 4 && xobj.status == "200") {
-            callback(xobj.responseText, category);
-        }
-    };
-    xobj.send(null);  
+var currentMovieObj = {};
+
+var loadMovieTrailersFromFile = function(category) { 
+
+    if(category != null){
+         var jsonFile = "data/movie_trailers.json";
+        var xobj = new XMLHttpRequest();
+        xobj.overrideMimeType("application/json");
+        xobj.open('GET', jsonFile, true); 
+        xobj.onreadystatechange = function () {
+
+            if (xobj.readyState == 4 && xobj.status == "200") {
+                getMovieDataByCategory(xobj.responseText, category);
+            }
+        };
+        xobj.send(null);  
+    } else {
+          console.log("Error unable to load movie trailers from file");  
+    }
 }
 
 var getMovieDataByCategory = function (data, category) {
     var movieData = {};
     var selectedImdbId;
-    JSON.parse(data).forEach(function(movieObj){
-        if( movieObj.category.toLowerCase() === category.toLowerCase()){
-            movieData = movieObj;
-        }
-    });
+    var ytId;
     
-    selectedImdbId = movieData["movies"][0].imdb_id;
-    currentMovieObj = movieData;
-    getMovieDataFromOmdb(movieData,selectedImdbId);
+    if(data != null && category != null ){
+        JSON.parse(data).forEach(function(movieObj){
+            if( movieObj.category.toLowerCase() === category.toLowerCase()){
+                movieData = movieObj;
+            }
+        });
     
+        selectedImdbId = movieData["movies"][0].imdb_id;
+        ytId = movieData["movies"][0].yt_id;
+        currentMovieObj = movieData;
+        getMovieDataFromOmdb(movieData,selectedImdbId, ytId);
+    } else {
+          console.log("Error unable to get movie data by category");  
+    }
 }
 
 
 //takes one movie object from a given category to fetch data from
-var getMovieDataFromOmdb = function (movieObj, selectedImdbId) {
+var getMovieDataFromOmdb = function (movieObj, imdbId, ytId) {
+    //TODO verify all parameters before using them
     //pass the current movie object and the already selected movie id
-    updatePreviewList(movieObj, selectedImdbId);
-    makeOMDBRequest(null, selectedImdbId, displayData);
+    updatePreviewList(movieObj, imdbId);
+    makeOMDBRequest(null, imdbId, displayData);
 }
 
 var makeOMDBRequest = function (movieTitle, imdbId, callback) {
@@ -83,16 +91,10 @@ var makeOMDBRequest = function (movieTitle, imdbId, callback) {
     } 
 }
 
-var getSelectedMovieByImdbId = function (imdbId) {
-   getMovieDataFromOmdb(currentMovieObj, imdbId)
+var getSelectedMovieByImdbId = function (imdbId, ytId) {
+    if(imdbId != null && ytId != null) {
+        getMovieDataFromOmdb(currentMovieObj, imdbId, ytId);
+    }
 }
 
 
-
-
-
-
-
-var YTApiCall = function () {
-    
-}
