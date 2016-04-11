@@ -65,10 +65,6 @@ var updatePreviewList = function(movieObj, selectedMovieId) {
     
     for (ctr = 0; ctr < movieList.length; ctr++) {
         
-        //TODO the bug is that I need two pointers, I'm currently incrementing the counter when I find
-        //an existing imdb-id in the array which is causing the first trailer element not to get a data-attribute
-        //so if i set up a second pointer that only increments after the attribute is set, I may be heading in the right direction
-        
         if(movieIdArr.indexOf(movieList[ctr].imdb_id) === -1) {
             trailerSelectorArr[idPtr].setAttribute("data-imdb-id", movieList[ctr].imdb_id);
             
