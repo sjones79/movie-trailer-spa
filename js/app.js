@@ -81,15 +81,6 @@ var updatePreviewList = function(movieObj, selectedMovieId) {
         }
     }
     
-    console.log("trailerSelectorArr",trailerSelectorArr);
-
-    
-    
-    /*
-    var msglist = document.getElementById("msglist");
-
-    var show = msglist.getAttribute("data-list-size");
-     msglist.setAttribute("data-list-size", +show+3); */
 }
 
 
