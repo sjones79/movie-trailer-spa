@@ -68,7 +68,8 @@ var displayData = function (movieResponse) {
 
 var changeMovie = function() {
     var imdbId = this.getAttribute("data-imdb-id");
-    getSelectedMovieByImdbId(imdbId);      
+    var ytId = this.getAttribute("data-yt-id");
+    getSelectedMovieByImdbId(imdbId, ytId);      
 }
 
 var updatePreviewList = function(movieObj, selectedMovieId) {
@@ -87,6 +88,7 @@ var updatePreviewList = function(movieObj, selectedMovieId) {
         
         if(movieIdArr.indexOf(movieList[ctr].imdb_id) === -1) {
             trailerSelectorArr[idPtr].setAttribute("data-imdb-id", movieList[ctr].imdb_id);
+            trailerSelectorArr[idPtr].setAttribute('data-yt-id', movieList[ctr].yt_id);
             
             trailerSelectorArr[idPtr].addEventListener('click', changeMovie, false);
             
