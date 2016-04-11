@@ -49,16 +49,6 @@ var getAnimeMovies = function (data) {
 
 }
 
-var getDefaultMovie = function (data) {
-    var firstMovie;
-    JSON.parse(data).forEach(function(movieObj){
-        if(movieObj.category === 'Comic Books'){
-            firstMovie = movieObj["movies"][0].title;
-            makeOMDBRequest(firstMovie, null, displayData);
-        }
-    }); 
-}
-
 var makeOMDBRequest = function (movieTitle, movieId, callback) {
     //OMDB is an open source api for movie information
     //TODO when a a movie is not found, the response object has the following properties
@@ -96,24 +86,8 @@ var getSelectedMovieById = function (movieId, callback) {
 
 //takes one movie object from a given category to fetch data from
 var getMovieDataFromOmdb = function (movieObj) {
-    
-    makeOMDBRequest(movieObj["movies"][0].title, null, displayData )
-    
-    for(var i = 1; i < movieObj['movies'].length; i++){
-        makeOMDBRequest(movieObj['movies'][i].title, displayData);
-    }
-   
+    makeOMDBRequest(movieObj["movies"][0].title, null, displayData);
 }
-
-
-var sendResponse = function(movieResponse) {
-    displayData(movieResponse);
-}
-
-var YTApiCall = function () {
-    
-}
-
 
 var loadMovieTrailersFromFile = function(callback) { 
     
@@ -129,4 +103,9 @@ var loadMovieTrailersFromFile = function(callback) {
         }
     };
     xobj.send(null);  
+}
+
+
+var YTApiCall = function () {
+    
 }
