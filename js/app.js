@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
 var displayData = function (movieResponse) {
     document.getElementById('movie-title').innerHTML = movieResponse.Title;
     document.getElementById('movie-description').innerHTML = '<p>' + movieResponse.Plot +'</p>';
+    //TODO add movie metadata
     
 }
 
@@ -67,8 +68,8 @@ var updatePreviewList = function(movieObj, selectedMovieId) {
     var idPtr = 0;
     var movieIdArr = [];
     
+    //push current movie so it is not added to the preview options
     movieIdArr.push(selectedMovieId);
-    console.log("movieList",movieList);
     
     for (ctr = 0; ctr < movieList.length; ctr++) {
         
