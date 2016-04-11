@@ -60,7 +60,7 @@ var displayData = function (movieResponse) {
 
 var changeMovie = function() {
     var imdbId = this.getAttribute("data-imdb-id");
-    getSelectedMovieByImdbId(imdbId, displayData);      
+    getSelectedMovieByImdbId(imdbId);      
 }
 
 var updatePreviewList = function(movieObj, selectedMovieId) {
