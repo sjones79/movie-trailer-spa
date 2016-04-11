@@ -38,17 +38,16 @@ var getMovieDataByCategory = function (data, category) {
         });
     
         selectedImdbId = movieData["movies"][0].imdb_id;
-        ytId = movieData["movies"][0].yt_id;
         currentMovieObj = movieData;
-        getMovieDataFromOmdb(movieData,selectedImdbId, ytId);
+        getMovieDataFromOmdb(movieData,selectedImdbId);
     } else {
           console.log("Error unable to get movie data by category");  
     }
 }
 
 
-var getMovieDataFromOmdb = function (movieObj, imdbId, ytId) {
-    
+var getMovieDataFromOmdb = function (movieObj, imdbId) {
+   
     if(!isEmpty(movieObj) && !isEmpty(imdbId)) {
         updatePreviewList(movieObj, imdbId);
         makeOMDBRequest(null, imdbId);
@@ -100,7 +99,7 @@ var isEmpty = function(param){
     //utility method to check for content of a parameter
     var paramIsEmpty;
     
-    paramIsEmpty = (param === null || typeof param === 'undefined' || isNaN(param) || param.trim() === '' || param.length < 1);
+    paramIsEmpty = (param === null || typeof param === 'undefined' || (typeof param === 'string' && param.trim() === '') || param.length < 1);
     
     return paramIsEmpty;
     
