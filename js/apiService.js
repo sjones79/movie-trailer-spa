@@ -12,62 +12,35 @@
 //TODO 
 // Add decent commenting
 
-var currentMovieObj = {};
 
-var loadMovieTrailersFromFile = function(callback) { 
+var loadMovieTrailersFromFile = function(callback, category) { 
     
+    //TODO check if callback is not null and is a function before proceeding
     var jsonFile = "data/movie_trailers.json";
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
-    xobj.open('GET', jsonFile, true); // Replace 'my_data' with the path to your file
+    xobj.open('GET', jsonFile, true); 
     xobj.onreadystatechange = function () {
 
         if (xobj.readyState == 4 && xobj.status == "200") {
-            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
-            callback(xobj.responseText);
+            callback(xobj.responseText, category);
         }
     };
     xobj.send(null);  
 }
 
-var getComicBookMovies = function (data) {
+var getMovieDataByCategory = function (data, category) {
+    var movieData = {};
+    JSON.parse(data).forEach(function(movieObj){
+        if( movieObj.category.toLowerCase() === category.toLowerCase()){
+            movieData = movieObj;
+        }
+    });
+
+    getMovieDataFromOmdb(movieData);
     
-    var comicBookMovies = {};
-    JSON.parse(data).forEach(function(movieObj){
-        if(movieObj.category === 'Comic Books'){
-            comicBookMovies = movieObj;
-        }
-    });
-    console.log(comicBookMovies);
-    currentMovieObj = comicBookMovies;
-    getMovieDataFromOmdb(comicBookMovies);    
 }
 
-var getMartialArtsMovies = function (data) {
-    var martialArtsMovies = {};
-    JSON.parse(data).forEach(function(movieObj){
-        if(movieObj.category === 'Martial Arts'){
-            martialArtsMovies = movieObj;
-        }
-    });
-    console.log(martialArtsMovies);
-    currentMovieObj = martialArtsMovies;
-    getMovieDataFromOmdb(martialArtsMovies);    
-
-}
-
-var getAnimeMovies = function (data) {
-    var animeMovies = {};
-    JSON.parse(data).forEach(function(movieObj){
-        if(movieObj.category === 'Anime'){
-            animeMovies = movieObj;
-        }
-    });
-    console.log(animeMovies); 
-    currentMovieObj = animeMovies;
-    getMovieDataFromOmdb(animeMovies);    
-
-}
 
 //takes one movie object from a given category to fetch data from
 var getMovieDataFromOmdb = function (movieObj) {
@@ -92,7 +65,7 @@ var makeOMDBRequest = function (movieTitle, imdbId, callback) {
             url = "http://www.omdbapi.com/?i="+imdbId+"&plot=short&r=json";
         }
     }
-    console.log("currentMovieObj",currentMovieObj);
+
     if(url != undefined && callback != undefined) {
         omdbRequest.onreadystatechange = function() {
             if (omdbRequest.readyState == 4 && omdbRequest.status == 200) {
