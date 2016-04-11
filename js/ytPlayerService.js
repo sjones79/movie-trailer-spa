@@ -1,5 +1,7 @@
-var ytPlayer;
+'use strict';
 
+var ytPlayer;
+//default to first movie on page application load
 function onYouTubeIframeAPIReady() {
      ytPlayer = new YT.Player('player', {
         height: '500',
