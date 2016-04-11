@@ -24,22 +24,22 @@ document.addEventListener('DOMContentLoaded', function () {
         
         //by default load the comic book movies
         document.getElementById('movie-category').innerHTML = "Comic Book Movies";
-        loadMovieTrailersFromFile(getComicBookMovies);
+        loadMovieTrailersFromFile(getMovieDataByCategory, "Comic Books");
     
         //load movies based on category menu
         comicBookMenu.addEventListener('click', function(e){
             document.getElementById('movie-category').innerHTML = "Comic Book API Service Call";
-            loadMovieTrailersFromFile(getComicBookMovies);
+            loadMovieTrailersFromFile(getMovieDataByCategory, "Comic Books");
         }, false);
         
         martialArtMenu.addEventListener('click', function(e){
             document.getElementById('movie-category').innerHTML = "Martial Arts API Service Call";
-            loadMovieTrailersFromFile(getMartialArtsMovies);
+            loadMovieTrailersFromFile(getMovieDataByCategory, "Martial Arts");
         }, false);
         
         animeMenu.addEventListener('click', function(e){
             document.getElementById('movie-category').innerHTML = "Anime API Service Call";
-            loadMovieTrailersFromFile(getAnimeMovies);
+            loadMovieTrailersFromFile(getMovieDataByCategory, "Anime");
         }, false);
     
     
@@ -54,6 +54,7 @@ var displayData = function (movieResponse) {
     document.getElementById('movie-title').innerHTML = movieResponse.Title;
     document.getElementById('movie-description').innerHTML = '<p>' + movieResponse.Plot +'</p>';
     //TODO add movie metadata
+
     
 }
 
@@ -63,6 +64,9 @@ var changeMovie = function() {
 }
 
 var updatePreviewList = function(movieObj, selectedMovieId) {
+    //TODO when updating the preview list, we are not adding the original movie back to the options to be selected below
+    //as we change movies, the first movie should be available
+    //there should always be one active movie and four staged ones
     var movieList = movieObj["movies"];
     var ctr;
     var idPtr = 0;
