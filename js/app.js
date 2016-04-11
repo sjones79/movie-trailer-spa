@@ -13,11 +13,14 @@ document.addEventListener('DOMContentLoaded', function () {
         var comicBookMenu = document.querySelector('#comicbooks');
         var martialArtMenu = document.querySelector('#martialarts');
         var animeMenu = document.querySelector('#anime');
+        var trailer1 = document.querySelector('#trailer1');
+        var trailer2 = document.querySelector('#trailer2');
+        var trailer3 = document.querySelector('#trailer3');
+        var trailer4 = document.querySelector('#trailer4');
         
         //by default load the comic book movies
         document.getElementById('movie-category').innerHTML = "Comic Book Movies";
         loadMovieTrailersFromFile(getComicBookMovies);
-       
     
         comicBookMenu.addEventListener('click', function(e){
             document.getElementById('movie-category').innerHTML = "Comic Book API Service Call";
@@ -40,18 +43,9 @@ var displayData = function (movieResponse) {
     document.getElementById('movie-title').innerHTML = movieResponse.Title;
     document.getElementById('movie-description').innerHTML = '<p>' + movieResponse.Plot +'</p>';
     
-   /* var movieObjList = movieCategoryObj["movies"];
-    var movie;
-    var trailerCtr = 1;
-    for(movie in movieObjList){
-        if(movieObjList[movie]['title'] !== movieResponse.Title) {
-            document.getElementById('trailer'+trailerCtr).setAttribute("data-id", movieObjList[movie]['id']);
-            trailerCtr += 1;
-        }
-    } */
 }
 
-var populatePreviewList = function(movieResponse) {
+var updatePreviewList = function(movieObj) {
     
 }
 
