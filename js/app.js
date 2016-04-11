@@ -1,6 +1,7 @@
 'use strict';
 
 /*
+//TODO proper file header with author, functionality etc
 
 click on a nav item,
     the first movie for that category shows up as the main movie
@@ -25,20 +26,21 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('movie-category').innerHTML = "Comic Book Movies";
         loadMovieTrailersFromFile(getComicBookMovies);
     
+        //load movies based on category menu
         comicBookMenu.addEventListener('click', function(e){
             document.getElementById('movie-category').innerHTML = "Comic Book API Service Call";
             loadMovieTrailersFromFile(getComicBookMovies);
-        });
+        }, false);
         
         martialArtMenu.addEventListener('click', function(e){
             document.getElementById('movie-category').innerHTML = "Martial Arts API Service Call";
             loadMovieTrailersFromFile(getMartialArtsMovies);
-        });
+        }, false);
         
         animeMenu.addEventListener('click', function(e){
             document.getElementById('movie-category').innerHTML = "Anime API Service Call";
             loadMovieTrailersFromFile(getAnimeMovies);
-        });
+        }, false);
     
     
         trailerSelectorArr.push(trailer1);
