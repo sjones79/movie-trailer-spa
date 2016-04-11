@@ -14,9 +14,9 @@ document.addEventListener('DOMContentLoaded', function () {
         var martialArtMenu = document.querySelector('#martialarts');
         var animeMenu = document.querySelector('#anime');
         
-           //by default load the comic book movies
+        //by default load the comic book movies
         document.getElementById('movie-category').innerHTML = "Comic Book Movies";
-        loadMovieTrailersFromFile(getDefaultMovie);
+        loadMovieTrailersFromFile(getComicBookMovies);
        
     
         comicBookMenu.addEventListener('click', function(e){
@@ -32,15 +32,26 @@ document.addEventListener('DOMContentLoaded', function () {
         animeMenu.addEventListener('click', function(e){
             document.getElementById('movie-category').innerHTML = "Anime API Service Call";
             loadMovieTrailersFromFile(getAnimeMovies);
-        });
-    
-       
+        });   
         
 });
 
 var displayData = function (movieResponse) {
     document.getElementById('movie-title').innerHTML = movieResponse.Title;
     document.getElementById('movie-description').innerHTML = '<p>' + movieResponse.Plot +'</p>';
+    
+   /* var movieObjList = movieCategoryObj["movies"];
+    var movie;
+    var trailerCtr = 1;
+    for(movie in movieObjList){
+        if(movieObjList[movie]['title'] !== movieResponse.Title) {
+            document.getElementById('trailer'+trailerCtr).setAttribute("data-id", movieObjList[movie]['id']);
+            trailerCtr += 1;
+        }
+    } */
 }
 
+var populatePreviewList = function(movieResponse) {
+    
+}
 
