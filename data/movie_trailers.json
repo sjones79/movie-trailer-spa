@@ -59,7 +59,7 @@
 		"category": "Anime",
 		"movies": [{
             "imdb_id" : "tt0107692",
-            "yt_id" : "https://www.youtube.com/watch?v=kqh0CZ8w4Yc",
+            "yt_id" : "kqh0CZ8w4Yc",
             "yt_link" : "https://www.youtube.com/watch?v=kqh0CZ8w4Yc",
 			"title" : "Ninja Scroll"
 		}, {
