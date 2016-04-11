@@ -7,7 +7,7 @@
 // This should help with clicking on the other trailers and playing them for a given movie
 
 //TODO
-//ERROR HANDLING LIKE CRAZY
+//ADD ERROR HANDLING LIKE CRAZY
 
 //TODO 
 // Add decent commenting
@@ -33,6 +33,8 @@ var getMartialArtsMovies = function (data) {
         }
     });
     console.log(martialArtsMovies);
+    getMovieDataFromOmdb(martialArtsMovies);    
+
 }
 
 var getAnimeMovies = function (data) {
@@ -42,55 +44,76 @@ var getAnimeMovies = function (data) {
             animeMovies = movieObj;
         }
     });
-    console.log(animeMovies);    
+    console.log(animeMovies); 
+    getMovieDataFromOmdb(animeMovies);    
+
 }
 
-var makeOMDBRequest = function (movieTitle, movieObj, callback) {
+var getDefaultMovie = function (data) {
+    var firstMovie;
+    JSON.parse(data).forEach(function(movieObj){
+        if(movieObj.category === 'Comic Books'){
+            firstMovie = movieObj["movies"][0].title;
+            makeOMDBRequest(firstMovie, null, displayData);
+        }
+    }); 
+}
+
+var makeOMDBRequest = function (movieTitle, movieId, callback) {
     //OMDB is an open source api for movie information
     //TODO when a a movie is not found, the response object has the following properties
     //{Response: "False", Error: "Movie not found!"}
     //Error checking should check for a property called 'Response' and handle if the value is 'False'
     var omdbRequest = new XMLHttpRequest();
-    var url = "http://www.omdbapi.com/?t="+movieTitle+"&y=&plot=short&r=json";
-
-    omdbRequest.onreadystatechange = function() {
-        if (omdbRequest.readyState == 4 && omdbRequest.status == 200) {
-            var movieResponse = JSON.parse(omdbRequest.responseText);
-            callback(movieResponse, movieObj);
+    var url;
+    
+    if(movieTitle != null && movieTitle.length > 0){
+        url = "http://www.omdbapi.com/?t="+movieTitle+"&y=&plot=short&r=json";
+    }
+    else {
+        if(movieId != null && movieId.length > 0){
+            url = "http://www.omdbapi.com/?i="+movieId+"&plot=short&r=json";
         }
-    };
-    omdbRequest.open("GET", url, true);
-    omdbRequest.send(); 
-} 
+    }
+    
+    if(url != undefined && callback != undefined) {
+        omdbRequest.onreadystatechange = function() {
+            if (omdbRequest.readyState == 4 && omdbRequest.status == 200) {
+                var movieResponse = JSON.parse(omdbRequest.responseText);
+                callback(movieResponse);
+            }
+        };
+    
+        omdbRequest.open("GET", url, true);
+        omdbRequest.send(); 
+    } 
+}
+
+var getSelectedMovieById = function (movieId, callback) {
+    makeOMDBRequest(null, movieId, callback);
+}
+
 
 //takes one movie object from a given category to fetch data from
 var getMovieDataFromOmdb = function (movieObj) {
     
-    for(var i = 0; i < movieObj['movies'].length; i++){
-       // omdbRequest(movies[i].title)
-        console.log( movieObj['movies'][i].title);
-        makeOMDBRequest(movieObj['movies'][i].title, movieObj, sendResponse);
+    makeOMDBRequest(movieObj["movies"][0].title, null, displayData )
+    
+    for(var i = 1; i < movieObj['movies'].length; i++){
+        makeOMDBRequest(movieObj['movies'][i].title, displayData);
     }
    
 }
 
-var sendResponse = function(movieResponse, movieObj) {
-    displayData(movieResponse, movieObj);
+
+var sendResponse = function(movieResponse) {
+    displayData(movieResponse);
 }
 
 var YTApiCall = function () {
     
 }
-var myTest = function (movieResponse, movieObj){
-    console.log("mytest movieResponse",movieResponse);
-    var x;
-    for (x in movieResponse){
-        console.log("myTest property in movieResponse",x);
-        if(movieObj["movies"]
-          )
-        movieObj["movies"]
-    }
-}
+
 
 var loadMovieTrailersFromFile = function(callback) { 
     
