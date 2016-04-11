@@ -3,9 +3,6 @@
 /*
 //TODO proper file header with author, functionality etc
 
-click on a nav item,
-    the first movie for that category shows up as the main movie
-    then clicking on any of the other trailers for that category makes it the main one.
 
 */
 

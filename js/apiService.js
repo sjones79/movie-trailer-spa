@@ -1,20 +1,15 @@
 'use strict';
 
-
-//TODO
-//ADD ERROR HANDLING LIKE CRAZY
-
 //TODO 
 // Add decent commenting
 
-//TODO make it clear what the callbacks are
 
 var currentMovieObj = {};
 
 var loadMovieTrailersFromFile = function(category) { 
 
     if(category != null){
-         var jsonFile = "data/movie_trailers.json";
+        var jsonFile = "data/movie_trailers.json";
         var xobj = new XMLHttpRequest();
         xobj.overrideMimeType("application/json");
         xobj.open('GET', jsonFile, true); 
@@ -43,46 +38,49 @@ var getMovieDataByCategory = function (data, category) {
         });
     
         selectedImdbId = movieData["movies"][0].imdb_id;
-        ytId = movieData["movies"][0].yt_id;
         currentMovieObj = movieData;
-        getMovieDataFromOmdb(movieData,selectedImdbId, ytId);
+        getMovieDataFromOmdb(movieData,selectedImdbId);
     } else {
           console.log("Error unable to get movie data by category");  
     }
 }
 
 
-//takes one movie object from a given category to fetch data from
-var getMovieDataFromOmdb = function (movieObj, imdbId, ytId) {
-    //TODO verify all parameters before using them
-    //pass the current movie object and the already selected movie id
-    updatePreviewList(movieObj, imdbId);
-    makeOMDBRequest(null, imdbId, displayData);
+var getMovieDataFromOmdb = function (movieObj, imdbId) {
+   
+    if(!isEmpty(movieObj) && !isEmpty(imdbId)) {
+        updatePreviewList(movieObj, imdbId);
+        makeOMDBRequest(null, imdbId);
+    } else {
+          console.log("Error unable to getMovieDataFromOmdb");  
+    }
+    
 }
 
-var makeOMDBRequest = function (movieTitle, imdbId, callback) {
-    //OMDB is an open source api for movie information
-    //TODO when a a movie is not found, the response object has the following properties
-    //{Response: "False", Error: "Movie not found!"}
-    //Error checking should check for a property called 'Response' and handle if the value is 'False'
-     //TODO check if callback is not null and is a function before proceeding
+var makeOMDBRequest = function (movieTitle, imdbId) {
+    
     var omdbRequest = new XMLHttpRequest();
     var url;
     
-    if(movieTitle != null && movieTitle.length > 0){
+    if(!isEmpty(movieTitle)){
         url = "http://www.omdbapi.com/?t="+movieTitle+"&y=&plot=short&r=json";
     }
     else {
-        if(imdbId != null && imdbId.length > 0){
+        if(!isEmpty(imdbId)){
             url = "http://www.omdbapi.com/?i="+imdbId+"&plot=short&r=json";
         }
     }
 
-    if(url != undefined && callback != undefined) {
+    if(!isEmpty(url) ) {
         omdbRequest.onreadystatechange = function() {
             if (omdbRequest.readyState == 4 && omdbRequest.status == 200) {
                 var movieResponse = JSON.parse(omdbRequest.responseText);
-                callback(movieResponse);
+                if(movieResponse.Response === "True") {
+                    displayData(movieResponse);
+                }  else {
+                    console.log("Error making omdbrequest " + movieResponse.Error);
+                }
+                
             }
         };
     
@@ -92,9 +90,19 @@ var makeOMDBRequest = function (movieTitle, imdbId, callback) {
 }
 
 var getSelectedMovieByImdbId = function (imdbId, ytId) {
-    if(imdbId != null && ytId != null) {
+    if(!isEmpty(imdbId)  &&  !isEmpty(ytId) ) {
         getMovieDataFromOmdb(currentMovieObj, imdbId, ytId);
     }
+}
+
+var isEmpty = function(param){
+    //utility method to check for content of a parameter
+    var paramIsEmpty;
+    
+    paramIsEmpty = (param === null || typeof param === 'undefined' || (typeof param === 'string' && param.trim() === '') || param.length < 1);
+    
+    return paramIsEmpty;
+    
 }
 
 
