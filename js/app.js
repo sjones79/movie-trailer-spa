@@ -103,8 +103,9 @@ var updatePreviewList = function(movieObj, selectedMovieId) {
             trailerSelectorArr[idPtr].setAttribute("data-imdb-id", movieList[ctr].imdb_id);
             trailerSelectorArr[idPtr].setAttribute('data-yt-id', movieList[ctr].yt_id);
             
-            //set the preview img src
-            trailerSelectorArr[idPtr].getElementsByTagName('img')[0].src = movieList[ctr].yt_img ;
+            //set the preview img src and title
+            trailerSelectorArr[idPtr].getElementsByTagName('img')[0].src = movieList[ctr].yt_img;
+            trailerSelectorArr[idPtr].getElementsByTagName('h3')[0].innerHTML = movieList[ctr].title;
             
             trailerSelectorArr[idPtr].addEventListener('click', changeMovie, false);
             
