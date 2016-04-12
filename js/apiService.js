@@ -1,13 +1,9 @@
 'use strict';
 
-//TODO 
-// Add decent commenting
-
-
 var currentMovieObj = {};
 
 var loadMovieTrailersFromFile = function(category) { 
-
+   //reads the data from the json file
     if(category != null){
         var jsonFile = "data/movie_trailers.json";
         var xobj = new XMLHttpRequest();
@@ -47,7 +43,7 @@ var getMovieDataByCategory = function (data, category) {
 
 
 var getMovieDataFromOmdb = function (movieObj, imdbId) {
-   
+
     if(!isEmpty(movieObj) && !isEmpty(imdbId)) {
         updatePreviewList(movieObj, imdbId);
         makeOMDBRequest(null, imdbId);
@@ -58,7 +54,7 @@ var getMovieDataFromOmdb = function (movieObj, imdbId) {
 }
 
 var makeOMDBRequest = function (movieTitle, imdbId) {
-    
+    //makes API request to open source movie database
     var omdbRequest = new XMLHttpRequest();
     var url;
     
