@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
         loadMovieTrailersFromFile("Comic Books");
     
         var defaultYtId;
-        //load movies based on category menu
+        //show movies based on category menu
         comicBookMenu.addEventListener('click', function(){
             defaultYtId = 'gtTfd6tISfw';
             document.getElementById('movie-category').innerHTML = "Comic Books";
@@ -66,7 +66,7 @@ var displayData = function (movieResponse) {
     movieMetaDataHTML += '<dd>' + movieResponse.Actors +  '</dd>';
     
     //close the list
-    movieMetaDataHTML += '</ul>';
+    movieMetaDataHTML += '</dl>';
     
     document.getElementById('movie-metadata').innerHTML = movieMetaDataHTML;
 
