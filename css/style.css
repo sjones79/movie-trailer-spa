@@ -23,7 +23,7 @@ dd {
   width: 50%;
   /* adjust the width; make sure the total of both is 100% */
   padding: 0;
-  margin: 0
+  margin: 0;
 }
 
 
@@ -34,7 +34,6 @@ dd {
 .thumbnail-wrapper a {
     text-decoration: none;
 }
-
 
 .thumbnail-wrapper a h3 {
     text-align: center;
@@ -47,12 +46,6 @@ dd {
 	color:#fff;
 	margin:0px;
 	font-family: 'Josefin Sans', sans-serif;
-}
-
-
-.trailer-thumbnail {
-    margin-bottom: 0px;
-    position: relative;
 }
 
 header h1 {
@@ -103,22 +96,32 @@ header h4 {
 }
 
 
-@media all and (max-device-width: 720px){
-    h3 {
-        font-size: 18px;
+
+
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: @screen-sm-min) { 
+     h3 {
+        font-size: 11px;
     }
+
 }
 
-@media all and (max-device-width: 640px){
-    h3 {
-        font-size: 16px;
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md-min) {
+     h3 {
+        font-size: 13px;
     }
+
 }
 
-@media all and (max-device-width: 320px){
-    h3 {
-        font-size: 12px;
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: @screen-lg-min) { 
+     h3 {
+        font-size: 15px;
     }
+
 }
+
 
 
