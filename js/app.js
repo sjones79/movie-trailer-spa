@@ -94,8 +94,12 @@ var updatePreviewList = function(movieObj, selectedMovieId) {
     for (ctr = 0; ctr < movieList.length; ctr++) {
         
         if(movieIdArr.indexOf(movieList[ctr].imdb_id) === -1) {
+            //add data attributes used for movie selection
             trailerSelectorArr[idPtr].setAttribute("data-imdb-id", movieList[ctr].imdb_id);
             trailerSelectorArr[idPtr].setAttribute('data-yt-id', movieList[ctr].yt_id);
+            
+            //set the preview img src
+            trailerSelectorArr[idPtr].getElementsByTagName('img')[0].src = movieList[ctr].yt_img ;
             
             trailerSelectorArr[idPtr].addEventListener('click', changeMovie, false);
             
