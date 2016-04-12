@@ -3,7 +3,6 @@
 /*
 //TODO proper file header with author, functionality etc
 //TODO make the youtube video responsive (very doable, just have to look for it on bootsnipp)
-//TODO write a simple JS to add and remove active class on menu items
 
 
 */
@@ -52,8 +51,6 @@ document.addEventListener('DOMContentLoaded', function () {
         trailerSelectorArr.push(trailer2);
         trailerSelectorArr.push(trailer3);
         trailerSelectorArr.push(trailer4);
-    
-       
         
 });
 
@@ -87,33 +84,40 @@ var changeMovie = function() {
 }
 
 var updatePreviewList = function(movieObj, selectedMovieId) {
-    //TODO error check the emptiness of the parameters before using them
-    var movieList = movieObj["movies"];
+    
     var ctr;
     var idPtr = 0;
     var movieIdArr = [];
+    var movieList;
     
-    //push current movie so it is not added to the preview options
-    movieIdArr.push(selectedMovieId);
-    
-    for (ctr = 0; ctr < movieList.length; ctr++) {
+    if(!isEmpty(movieObj)){
+        movieList = movieObj["movies"];
         
-        if(movieIdArr.indexOf(movieList[ctr].imdb_id) === -1) {
-            //add data attributes used for movie selection
-            trailerSelectorArr[idPtr].setAttribute("data-imdb-id", movieList[ctr].imdb_id);
-            trailerSelectorArr[idPtr].setAttribute('data-yt-id', movieList[ctr].yt_id);
+        if(!isEmpty(selectedMovieId)){
+            //push current movie so it is not added to the preview options
+            movieIdArr.push(selectedMovieId);
             
-            //set the preview img src and title
-            trailerSelectorArr[idPtr].getElementsByTagName('img')[0].src = movieList[ctr].yt_img;
-            trailerSelectorArr[idPtr].getElementsByTagName('h3')[0].innerHTML = movieList[ctr].title;
-            
-            trailerSelectorArr[idPtr].addEventListener('click', changeMovie, false);
-            
-            
-            movieIdArr.push(movieList[ctr].imdb_id);
-            idPtr++;
+            for (ctr = 0; ctr < movieList.length; ctr++) {
+        
+                if(movieIdArr.indexOf(movieList[ctr].imdb_id) === -1) {
+                    //add data attributes used for movie selection
+                    trailerSelectorArr[idPtr].setAttribute("data-imdb-id", movieList[ctr].imdb_id);
+                    trailerSelectorArr[idPtr].setAttribute('data-yt-id', movieList[ctr].yt_id);
+
+                    //set the preview img src and title
+                    trailerSelectorArr[idPtr].getElementsByTagName('img')[0].src = movieList[ctr].yt_img;
+                    trailerSelectorArr[idPtr].getElementsByTagName('h3')[0].innerHTML = movieList[ctr].title;
+
+                    trailerSelectorArr[idPtr].addEventListener('click', changeMovie, false);
+
+
+                    movieIdArr.push(movieList[ctr].imdb_id);
+                    idPtr++;
+                }
+            }
         }
     }
+    
 }
 
 
