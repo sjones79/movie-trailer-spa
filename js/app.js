@@ -21,31 +21,28 @@ document.addEventListener('DOMContentLoaded', function () {
         var trailer4 = document.querySelector('#trailer4');    
         
         //by default load the comic book movies
-        document.getElementById('movie-category').innerHTML = "Comic Book Movies";
+        document.getElementById('movie-category').innerHTML = "Comic Books";
         loadMovieTrailersFromFile("Comic Books");
     
         var defaultYtId;
         //load movies based on category menu
         comicBookMenu.addEventListener('click', function(){
             defaultYtId = 'gtTfd6tISfw';
-            document.getElementById('movie-category').innerHTML = "Comic Book Movies";
-            toggleActiveMenu();
+            document.getElementById('movie-category').innerHTML = "Comic Books";
             ytPlayer.cueVideoById(defaultYtId);
             loadMovieTrailersFromFile("Comic Books");
         }, false);
         
         martialArtMenu.addEventListener('click', function(){
             defaultYtId = 'EzixcX_FonU';
-            document.getElementById('movie-category').innerHTML = "Martial Arts Movies";
-            toggleActiveMenu();
+            document.getElementById('movie-category').innerHTML = "Martial Arts";
             ytPlayer.cueVideoById(defaultYtId);
             loadMovieTrailersFromFile("Martial Arts");
         }, false);
         
         animeMenu.addEventListener('click', function(){
             defaultYtId = 'kqh0CZ8w4Yc';
-            document.getElementById('movie-category').innerHTML = "Anime Movies";
-            toggleActiveMenu();
+            document.getElementById('movie-category').innerHTML = "Anime";
             ytPlayer.cueVideoById(defaultYtId);
             loadMovieTrailersFromFile("Anime");
         }, false);
@@ -64,10 +61,13 @@ var displayData = function (movieResponse) {
     document.getElementById('movie-title').innerHTML = movieResponse.Title;
     document.getElementById('movie-description').innerHTML = '<p>' + movieResponse.Plot +'</p>';
     
-    var movieMetaDataHTML = '<ul>';
-    movieMetaDataHTML += '<li>Year: ' + movieResponse.Year + '</li>';
-    movieMetaDataHTML += '<li>Director: ' + movieResponse.Director + '</li>';
-    movieMetaDataHTML += '<li>Stars: ' + movieResponse.Actors + '</li>';
+    var movieMetaDataHTML = '<dl>';
+    movieMetaDataHTML += '<dt><dfn>Year</dfn></dt>';
+    movieMetaDataHTML+= '<dd>' + movieResponse.Year + '</dd>';
+    movieMetaDataHTML += '<dt><dfn>Director</dfn></dt>';
+    movieMetaDataHTML+= '<dd>' + movieResponse.Director + '</dd>';
+    movieMetaDataHTML += '<dt><dfn>Stars</dfn></dt>';
+    movieMetaDataHTML += '<dd>' + movieResponse.Actors +  '</dd>';
     
     //close the list
     movieMetaDataHTML += '</ul>';
@@ -116,10 +116,6 @@ var updatePreviewList = function(movieObj, selectedMovieId) {
     }
 }
 
-var toggleActiveMenu = function () {
-    //if this.getelement something.... doesn't have active class,then add it.
-    //remove all other active classes
-}
 
 
 
