@@ -16,7 +16,8 @@ dt {
   width: 50%;
   /* adjust the width; make sure the total of both is 100% */
   padding: 0;
-  margin: 0
+  margin: 0;
+    color: #8ab839;
 }
 dd {
   float: left;
@@ -45,11 +46,11 @@ thumbnail.wrapper a img {
     font-size: 15px;
     float: left;
     width: 100%;
-    font-weight: 600;
+    font-weight: 200;
 	background: #8ab839;
 	color:#fff;
 	margin:0px;
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Josefin Sans', sans-serif;
 }
 
 
@@ -62,7 +63,6 @@ header h1 {
 	margin: 1em 0 0.5em 0;
 	font-weight: 100;
 	text-transform: uppercase;
-	/*color: #00caa6;*/
     color: beige;
 	font-style: italic;
 	font-family: 'Josefin Sans', sans-serif;
@@ -71,7 +71,7 @@ header h1 {
 	text-shadow: 2px 5px 0 rgba(150,150,150,0.2);
 }
 
-.movie-header h2 {
+header h2 {
 	margin: 1em 0 0.5em 0;
 	color: #148773;
 	font-size: 26px;
@@ -83,7 +83,7 @@ header h1 {
 
 header h3 {
 	margin: 1em 0 0.5em 0;
-	color: beige;
+	color: #8ab839;
 	font-size: 22px;
 	line-height: 40px;
 	font-weight: 100;
@@ -94,7 +94,7 @@ header h3 {
      
 }
 
-.movie-header h4 {
+header h4 {
 	margin: 1em 0 0.5em 0;
 	color: #343434;
 	font-size: 18px;
