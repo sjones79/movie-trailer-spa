@@ -1,11 +1,5 @@
 'use strict';
 
-/*
-//TODO proper file header with author, functionality etc
-
-
-*/
-
 var trailerSelectorArr = [];
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -19,28 +13,28 @@ document.addEventListener('DOMContentLoaded', function () {
         var trailer4 = document.querySelector('#trailer4');    
         
         //by default load the comic book movies
-        document.getElementById('movie-category').innerHTML = "Comic Book Movies";
+        document.getElementById('movie-category').innerHTML = "Comic Books";
         loadMovieTrailersFromFile("Comic Books");
     
         var defaultYtId;
-        //load movies based on category menu
+        //show movies based on category menu
         comicBookMenu.addEventListener('click', function(){
             defaultYtId = 'gtTfd6tISfw';
-            document.getElementById('movie-category').innerHTML = "Comic Book Movies";
+            document.getElementById('movie-category').innerHTML = "Comic Books";
             ytPlayer.cueVideoById(defaultYtId);
             loadMovieTrailersFromFile("Comic Books");
         }, false);
         
         martialArtMenu.addEventListener('click', function(){
             defaultYtId = 'EzixcX_FonU';
-            document.getElementById('movie-category').innerHTML = "Martial Arts Movies";
+            document.getElementById('movie-category').innerHTML = "Martial Arts";
             ytPlayer.cueVideoById(defaultYtId);
             loadMovieTrailersFromFile("Martial Arts");
         }, false);
         
         animeMenu.addEventListener('click', function(){
             defaultYtId = 'kqh0CZ8w4Yc';
-            document.getElementById('movie-category').innerHTML = "Anime Movies";
+            document.getElementById('movie-category').innerHTML = "Anime";
             ytPlayer.cueVideoById(defaultYtId);
             loadMovieTrailersFromFile("Anime");
         }, false);
@@ -50,8 +44,6 @@ document.addEventListener('DOMContentLoaded', function () {
         trailerSelectorArr.push(trailer2);
         trailerSelectorArr.push(trailer3);
         trailerSelectorArr.push(trailer4);
-    
-       
         
 });
 
@@ -59,13 +51,16 @@ var displayData = function (movieResponse) {
     document.getElementById('movie-title').innerHTML = movieResponse.Title;
     document.getElementById('movie-description').innerHTML = '<p>' + movieResponse.Plot +'</p>';
     
-    var movieMetaDataHTML = '<ul>';
-    movieMetaDataHTML += '<li>Year: ' + movieResponse.Year + '</li>';
-    movieMetaDataHTML += '<li>Director: ' + movieResponse.Director + '</li>';
-    movieMetaDataHTML += '<li>Stars: ' + movieResponse.Actors + '</li>';
+    var movieMetaDataHTML = '<dl>';
+    movieMetaDataHTML += '<dt><dfn>Year</dfn></dt>';
+    movieMetaDataHTML+= '<dd>' + movieResponse.Year + '</dd>';
+    movieMetaDataHTML += '<dt><dfn>Director</dfn></dt>';
+    movieMetaDataHTML+= '<dd>' + movieResponse.Director + '</dd>';
+    movieMetaDataHTML += '<dt><dfn>Stars</dfn></dt>';
+    movieMetaDataHTML += '<dd>' + movieResponse.Actors +  '</dd>';
     
     //close the list
-    movieMetaDataHTML += '</ul>';
+    movieMetaDataHTML += '</dl>';
     
     document.getElementById('movie-metadata').innerHTML = movieMetaDataHTML;
 
@@ -82,30 +77,41 @@ var changeMovie = function() {
 }
 
 var updatePreviewList = function(movieObj, selectedMovieId) {
-    //TODO error check the emptiness of the parameters before using them
-    var movieList = movieObj["movies"];
+    
     var ctr;
     var idPtr = 0;
     var movieIdArr = [];
+    var movieList;
     
-    //push current movie so it is not added to the preview options
-    movieIdArr.push(selectedMovieId);
-    
-    for (ctr = 0; ctr < movieList.length; ctr++) {
+    if(!isEmpty(movieObj)){
+        movieList = movieObj["movies"];
         
-        if(movieIdArr.indexOf(movieList[ctr].imdb_id) === -1) {
-            trailerSelectorArr[idPtr].setAttribute("data-imdb-id", movieList[ctr].imdb_id);
-            trailerSelectorArr[idPtr].setAttribute('data-yt-id', movieList[ctr].yt_id);
+        if(!isEmpty(selectedMovieId)){
+            //push current movie so it is not added to the preview options
+            movieIdArr.push(selectedMovieId);
             
-            trailerSelectorArr[idPtr].addEventListener('click', changeMovie, false);
-            
-            
-            movieIdArr.push(movieList[ctr].imdb_id);
-            idPtr++;
+            for (ctr = 0; ctr < movieList.length; ctr++) {
+        
+                if(movieIdArr.indexOf(movieList[ctr].imdb_id) === -1) {
+                    //add data attributes used for movie selection
+                    trailerSelectorArr[idPtr].setAttribute("data-imdb-id", movieList[ctr].imdb_id);
+                    trailerSelectorArr[idPtr].setAttribute('data-yt-id', movieList[ctr].yt_id);
+
+                    //set the preview img src and title
+                    trailerSelectorArr[idPtr].getElementsByTagName('img')[0].src = movieList[ctr].yt_img;
+                    trailerSelectorArr[idPtr].getElementsByTagName('h3')[0].innerHTML = movieList[ctr].title;
+
+                    trailerSelectorArr[idPtr].addEventListener('click', changeMovie, false);
+
+
+                    movieIdArr.push(movieList[ctr].imdb_id);
+                    idPtr++;
+                }
+            }
         }
     }
-    
 }
+
 
 
 

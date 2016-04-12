@@ -1,8 +1,127 @@
 body {
     padding-top: 70px;
+    background-color:#181818;
+    color: #fff;
+}
+
+dl {
+  width: 100%;
+  overflow: hidden;
+  padding: 0;
+  margin: 0
+}
+dt {
+  float: left;
+  width: 50%;
+  /* adjust the width; make sure the total of both is 100% */
+  padding: 0;
+  margin: 0;
+    color: #8ab839;
+}
+dd {
+  float: left;
+  width: 50%;
+  /* adjust the width; make sure the total of both is 100% */
+  padding: 0;
+  margin: 0;
 }
 
 
-.trailer-thumbnail {
-    margin-bottom: 25px;
+.thumbnail-wrapper {
+   
 }
+
+.thumbnail-wrapper a {
+    text-decoration: none;
+}
+
+.thumbnail-wrapper a h3 {
+    text-align: center;
+    padding: 15px 0px;
+    font-size: 15px;
+    float: left;
+    width: 100%;
+    font-weight: 200;
+	background: #8ab839;
+	color:#fff;
+	margin:0px;
+	font-family: 'Josefin Sans', sans-serif;
+}
+
+header h1 {
+	margin: 1em 0 0.5em 0;
+	font-weight: 100;
+	text-transform: uppercase;
+    color: beige;
+	font-style: italic;
+	font-family: 'Josefin Sans', sans-serif;
+	font-size: 58px;
+	line-height: 54px;
+	text-shadow: 2px 5px 0 rgba(150,150,150,0.2);
+}
+
+header h2 {
+	margin: 1em 0 0.5em 0;
+	color: #148773;
+	font-size: 26px;
+	line-height: 40px;
+	font-weight: bold;
+	font-family: 'Josefin Sans', sans-serif;
+    
+}
+
+header h3 {
+	margin: 1em 0 0.5em 0;
+	color: #8ab839;
+	font-size: 22px;
+	line-height: 40px;
+	font-weight: 100;
+	text-transform: uppercase;
+	font-family: 'Josefin Sans', sans-serif;
+	letter-spacing: 1px;
+	font-style: italic;
+     
+}
+
+header h4 {
+	margin: 1em 0 0.5em 0;
+	color: #343434;
+	font-size: 18px;
+	line-height: 20px;
+	font-weight: bold;
+	font-family: 'Josefin Sans', sans-serif;
+}
+.embedded-video-outer-container {
+    max-width:750px; 
+}
+
+
+
+
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: @screen-sm-min) { 
+     h3 {
+        font-size: 11px;
+    }
+
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md-min) {
+     h3 {
+        font-size: 13px;
+    }
+
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: @screen-lg-min) { 
+     h3 {
+        font-size: 15px;
+    }
+
+}
+
+
+
