@@ -37,6 +37,7 @@ thumbnail.wrapper a img {
     position: relative;
 }
 
+/*
 .overlay {
     position: absolute;
     width: 263px;
@@ -60,26 +61,6 @@ thumbnail.wrapper a img {
     font-size:96px;
 }
 
+*/
 
-
-
-#vidbg {
-        /* Your background image */
-    background-image: url('http://placehold.it/800x550');
-    background-size: 800px 550px;
-    background-repeat: no-repeat;
-    padding 50px;
-}
-
-#player {
-        -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    overflow:hidden;
-    background-repeat: no-repeat;
-    width:780;
-    height:500;
-    cursor:pointer;
-}
 
