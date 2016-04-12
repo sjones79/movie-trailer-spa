@@ -1,11 +1,5 @@
 'use strict';
 
-/*
-//TODO proper file header with author, functionality etc
-//TODO when reducing the viewport the movie titles don't shrink causing the movies to get popped out of place
-
-*/
-
 var trailerSelectorArr = [];
 
 document.addEventListener('DOMContentLoaded', function () {
