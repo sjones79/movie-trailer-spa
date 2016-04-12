@@ -2,8 +2,7 @@
 
 /*
 //TODO proper file header with author, functionality etc
-//TODO make the youtube video responsive (very doable, just have to look for it on bootsnipp)
-
+//TODO when reducing the viewport the movie titles don't shrink causing the movies to get popped out of place
 
 */
 
@@ -117,7 +116,6 @@ var updatePreviewList = function(movieObj, selectedMovieId) {
             }
         }
     }
-    
 }
 
 
