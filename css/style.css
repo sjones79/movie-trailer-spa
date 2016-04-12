@@ -1,11 +1,35 @@
 body {
     padding-top: 70px;
-    background-color:#222;
+    background-color:#181818;
 	overflow-x:hidden;
 }
 
-
 .trailer-thumbnail {
     margin-bottom: 25px;
+   /* background: #242424; */
+    -moz-box-shadow: 2px 2px 2px #111;
+	-webkit-box-shadow: 2px 2px 2px #111;
+	box-shadow: 2px 2px 3px #111;
+    
 }
-.topbar
+
+#vidbg {
+        /* Your background image */
+    background-image: url('http://placehold.it/800x550');
+    background-size: 800px 550px;
+    background-repeat: no-repeat;
+    padding 50px;
+}
+
+#player {
+        -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    overflow:hidden;
+    background-repeat: no-repeat;
+    width:780;
+    height:500;
+    cursor:pointer;
+}
+
