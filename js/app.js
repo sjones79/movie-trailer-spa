@@ -2,6 +2,8 @@
 
 /*
 //TODO proper file header with author, functionality etc
+//TODO make the youtube video responsive (very doable, just have to look for it on bootsnipp)
+//TODO write a simple JS to add and remove active class on menu items
 
 
 */
@@ -27,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
         comicBookMenu.addEventListener('click', function(){
             defaultYtId = 'gtTfd6tISfw';
             document.getElementById('movie-category').innerHTML = "Comic Book Movies";
+            toggleActiveMenu();
             ytPlayer.cueVideoById(defaultYtId);
             loadMovieTrailersFromFile("Comic Books");
         }, false);
@@ -34,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
         martialArtMenu.addEventListener('click', function(){
             defaultYtId = 'EzixcX_FonU';
             document.getElementById('movie-category').innerHTML = "Martial Arts Movies";
+            toggleActiveMenu();
             ytPlayer.cueVideoById(defaultYtId);
             loadMovieTrailersFromFile("Martial Arts");
         }, false);
@@ -41,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
         animeMenu.addEventListener('click', function(){
             defaultYtId = 'kqh0CZ8w4Yc';
             document.getElementById('movie-category').innerHTML = "Anime Movies";
+            toggleActiveMenu();
             ytPlayer.cueVideoById(defaultYtId);
             loadMovieTrailersFromFile("Anime");
         }, false);
@@ -108,7 +113,11 @@ var updatePreviewList = function(movieObj, selectedMovieId) {
             idPtr++;
         }
     }
-    
+}
+
+var toggleActiveMenu = function () {
+    //if this.getelement something.... doesn't have active class,then add it.
+    //remove all other active classes
 }
 
 
